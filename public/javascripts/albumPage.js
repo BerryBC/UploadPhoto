@@ -1,6 +1,5 @@
 
 function albumPage() {
-
     (function () {
         'use strict';
         var jItems;
@@ -29,25 +28,14 @@ function albumPage() {
                 jEle.append(divBigPhoto);
             };
             jItems = $('.album-item-img');
-            // for (let tmpI = 0; tmpI < arrAlbumConfig.length; tmpI++) {
-            //     jItems[tmpI].onclick = function (e) {
-            //         // console.log(e.target.currentSrc);
-            //         // $('#showphoto img')[0].src = e.target.currentSrc;
-            //         // $('#album').addClass('gotblur');
-            //         // $('#showphoto')[0].style.left = ((window.innerWidth - $('#showphoto').width()) / 2) + 'px';
-            //         // $('#showphoto img').css({ "maxHeight": (window.innerHeight - 230) + "px" });
-            //         // $('#showphoto').show();
-            //     };
-            // };
         };
         $('#showphoto').hide();
         $('#showphoto')[0].onclick = function () {
             $('#showphoto').hide();
             $('#album').removeClass('gotblur');
+            $('#showphoto img')[0].src = "/images/Loading.gif";
         };
-
         funReshow(0);
-
         //----分页-----
         jItems = $('.album-item-img');
 
@@ -61,12 +49,9 @@ function albumPage() {
             console.log(data.pageIndex);
             funReshow(data.pageIndex);
         });
-
     }());
-
 };
 albumPage();
-
 (function () {
     var debug = false;
     var root = this;
@@ -82,36 +67,6 @@ albumPage();
         exports.FixPhotoOri = FixPhotoOri;
     } else {
         root.FixPhotoOri = FixPhotoOri;
-    };
-    FixPhotoOri.fixAll = function () {
-        console.log('in');
-        var jItemImg = $('.album-item-img');
-        for (let tmpI = 0; tmpI < jItemImg.length; tmpI++) {
-            EXIF.getData(jItemImg[tmpI], function () {
-
-                var orientation = EXIF.getTag(this, 'Orientation');
-                console.log('orientation:' + orientation);
-                if (typeof (orientation) != 'undefined') {
-                    switch (orientation) {
-                        case 6:
-                            jItemImg[tmpI].style.transform = "rotate(90deg)";
-                            console.log(jItemImg[tmpI].style.transform);
-                            break;
-                        case 3:
-                            jItemImg[tmpI].style.transform = "rotate(180deg)";
-                            console.log(jItemImg[tmpI].style.transform);
-                            break;
-                        case 8:
-                            jItemImg[tmpI].style.transform = "rotate(-90deg)";
-                            console.log(jItemImg[tmpI].style.transform);
-                            break;
-
-                        default:
-                            break;
-                    }
-                };
-            });
-        };
     };
     FixPhotoOri.fixBig = function () {
         var jItemImg = $('#showphoto')[0];
@@ -151,7 +106,6 @@ albumPage();
                 $('#showphoto img').css({ "maxWidth": "80%" });
                 $('#showphoto').css({ "top": 60 });
                 break;
-
             default:
                 break;
         }

@@ -7,7 +7,6 @@ var multer = require('multer');
 var bodyParser = require('body-parser');    // 过滤请求头部相应格式的body
 let fs = require('fs');
 var gm = require('gm');
-// var images = require('images');
 
 
 var indexRouter = require('./routes/index');
