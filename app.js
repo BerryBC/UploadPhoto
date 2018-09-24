@@ -65,17 +65,11 @@ app.post('/uploadphoto', upload.any(), function (req, res) {
         .autoOrient()
         .write(path.join(__dirname, 'public/thumbnailphoto/' + req.body.album) + "/" + eleFile.filename, () => { });
 
-      // images(eleFile.destination + "/" + eleFile.filename)           //Load image from file //加载图像文件
-      //   .size(600)             //Geometric scaling the image to 400 pixels width//等比缩放图像到400像素宽
-      //   .save(strFilePath + "/thumbnailphoto/" + eleFile.filename, {        //Save the image to a file,whih quality 50
-      //     quality: 60          //保存图片到文件,图片质量为50
-      //   });
       gm(eleFile.destination + "/" + eleFile.filename)
         .autoOrient()
         .write(strFilePath + "/" + eleFile.filename, () => { funMakeAlbum(); });
-      // fs.renameSync(eleFile.destination + "/" + eleFile.filename, strFilePath + "/" + eleFile.filename);
 
-      // fs.unlinkSync(eleFile.destination + "/" + eleFile.filename);
+      fs.unlinkSync(eleFile.destination + "/" + eleFile.filename);
     });
     res.send({ message: 'Done' });
   }else{

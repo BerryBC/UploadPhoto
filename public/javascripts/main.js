@@ -79,7 +79,6 @@ function main() {
           return xhr;
         }
       }
-      console.log(formData.get('album'));
       $.ajax({
         url: "/uploadphoto",
         type: "POST",
@@ -89,7 +88,6 @@ function main() {
         processData: false,
         success: function (data) {
           if (data.message == "Done") {
-            console.log('完成上传');
             $('.progress-bar').removeClass('progress-bar-danger');
             $('.progress-bar').removeClass('progress-bar-primary');
             $('.progress-bar').addClass('progress-bar-success');
@@ -103,7 +101,6 @@ function main() {
 
           }
           else {
-            console.log(data.msg);
             $('.progress-bar').removeClass('progress-bar-success');
             $('.progress-bar').removeClass('progress-bar-primary');
             $('.progress-bar').addClass('progress-bar-danger');
@@ -112,7 +109,6 @@ function main() {
           }
         },
         error: function (err) {
-          console.log("上传失败！");
           $('.progress-bar').removeClass('progress-bar-success');
           $('.progress-bar').removeClass('progress-bar-primary');
           $('.progress-bar').addClass('progress-bar-danger');

@@ -12,7 +12,6 @@ function albumPage() {
                 imgPhoto.className = "album-item-img";
                 imgPhoto.src = arrAlbumConfig[tmpI].PName;
                 imgPhoto.onclick= function (e) {
-                    // console.log(e.target.currentSrc);
                     $('#showphoto img')[0].src = e.target.currentSrc.replace(/\/thumbnailphoto\//, "\/photo\/");
                     $('#album').addClass('gotblur');
                     $('#showphoto')[0].style.left = ((window.innerWidth - $('#showphoto').width()) / 2) + 'px';
@@ -46,7 +45,6 @@ function albumPage() {
             }
         );
         $("#pagination").on("pageClicked", function (event, data) {
-            console.log(data.pageIndex);
             funReshow(data.pageIndex);
         });
     }());
@@ -73,35 +71,30 @@ albumPage();
         switch (jItemImg.style.transform) {
             case "":
                 jItemImg.style.transform = "rotate(90deg)";
-                console.log(jItemImg.style.transform);
                 $('#showphoto img').css({ "maxHeight": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto img').css({ "maxWidth": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto').css({ "top": 130 });
                 break;
             case "rotate(0deg)":
                 jItemImg.style.transform = "rotate(90deg)";
-                console.log(jItemImg.style.transform);
                 $('#showphoto img').css({ "maxHeight": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto img').css({ "maxWidth": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto').css({ "top": 130 });
                 break;
             case "rotate(90deg)":
                 jItemImg.style.transform = "rotate(180deg)";
-                console.log(jItemImg.style.transform);
                 $('#showphoto img').css({ "maxHeight": "530px" });
                 $('#showphoto img').css({ "maxWidth": "80%" });
                 $('#showphoto').css({ "top": 60 });
                 break;
             case "rotate(180deg)":
                 jItemImg.style.transform = "rotate(270deg)";
-                console.log(jItemImg.style.transform);
                 $('#showphoto img').css({ "maxHeight": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto img').css({ "maxWidth": Math.min(530, (window.innerHeight - 200)) + "px" });
                 $('#showphoto').css({ "top": 130 });
                 break;
             case "rotate(270deg)":
                 jItemImg.style.transform = "rotate(00deg)";
-                console.log(jItemImg.style.transform);
                 $('#showphoto img').css({ "maxHeight": "530px" });
                 $('#showphoto img').css({ "maxWidth": "80%" });
                 $('#showphoto').css({ "top": 60 });
