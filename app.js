@@ -18,10 +18,10 @@ var app = express();
 
 // 自定义 multer 的 diskStorage 的存储目录与文件名
 var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, path.join(__dirname, 'tmpFile'));
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, (new Date().valueOf() + file.fieldname));
     }
 });
@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -52,7 +52,7 @@ app.use('/users', usersRouter);
 
 
 
-app.post('/uploadphoto', upload.any(), function(req, res) {
+app.post('/uploadphoto', upload.any(), function (req, res) {
     if (typeof (req.body.album) != "undefined" && req.body.password === "Berry") {
         var reqFile = req.files;
         var strFilePath = path.join(__dirname, 'public/photo/' + req.body.album)
@@ -63,13 +63,22 @@ app.post('/uploadphoto', upload.any(), function(req, res) {
                 .setFormat('JPEG')
                 .quality(60)       //设置压缩质量: 0-100
                 .autoOrient()
-                .write(path.join(__dirname, 'public/thumbnailphoto/' + req.body.album) + "/" + eleFile.filename, (err) => { if (typeof (err) != 'undefined') { console.log(err) }; });
-
-            gm(eleFile.destination + "/" + eleFile.filename)
-                .autoOrient()
-                .write(strFilePath + "/" + eleFile.filename, (err) => { if (typeof (err) != 'undefined') { console.log(err) }; funMakeAlbum(); fs.unlinkSync(eleFile.destination + "/" + eleFile.filename); });
-
-            ;
+                .write(path.join(__dirname, 'public/thumbnailphoto/' + req.body.album) + "/" + eleFile.filename, (err) => {
+                    if (typeof (err) != 'undefined') {
+                        console.log(err);
+                    } else {
+                        gm(eleFile.destination + "/" + eleFile.filename)
+                            .autoOrient()
+                            .write(strFilePath + "/" + eleFile.filename, (err) => {
+                                if (typeof (err) != 'undefined') {
+                                    console.log(err)
+                                } else {
+                                    funMakeAlbum();
+                                    fs.unlinkSync(eleFile.destination + "/" + eleFile.filename);
+                                };
+                            });
+                    };
+                });
         });
         res.send({ message: 'Done' });
     } else {
@@ -80,12 +89,12 @@ app.post('/uploadphoto', upload.any(), function(req, res) {
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
