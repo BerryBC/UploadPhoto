@@ -57,7 +57,8 @@ app.post('/uploadphoto', upload.any(), function (req, res) {
         var reqFile = req.files;
         var strFilePath = path.join(__dirname, 'public/photo/' + req.body.album)
         //这里把上传的文件放到相应的相册目录里面去
-        reqFile.forEach(eleFile => {
+        for (let tmpI = 0; tmpI < reqFile.length; tmpI++) {
+            let eleFile = reqFile[tmpI];
             gm(eleFile.destination + "/" + eleFile.filename)
                 .resize(600)     //设置压缩后的w/h
                 .setFormat('JPEG')
@@ -79,7 +80,7 @@ app.post('/uploadphoto', upload.any(), function (req, res) {
                             });
                     };
                 });
-        });
+        };
         res.send({ message: 'Done' });
     } else {
         res.send({ message: 'WrongPW' });
