@@ -64,13 +64,13 @@ app.post('/uploadphoto', upload.any(), function (req, res) {
                 .setFormat('JPEG')
                 .quality(60)       //设置压缩质量: 0-100
                 .autoOrient()
-                .write(path.join(__dirname, 'public/thumbnailphoto/' + req.body.album) + "/" + eleFile.filename, (err) => {
+                .write(path.join(__dirname, 'public/thumbnailphoto/' + req.body.album) + "/" + eleFile.filename, (err, stdout, stderr, command) => {
                     if (typeof (err) != 'undefined') {
                         console.log(err);
                     } else {
                         gm(eleFile.destination + "/" + eleFile.filename)
                             .autoOrient()
-                            .write(strFilePath + "/" + eleFile.filename, (err) => {
+                            .write(strFilePath + "/" + eleFile.filename, (err, stdout, stderr, command) => {
                                 if (typeof (err) != 'undefined') {
                                     console.log(err)
                                 } else {
