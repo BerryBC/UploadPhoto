@@ -3,18 +3,22 @@ function albumPage() {
     (function () {
         'use strict';
         var jItems;
-        let jEle ;
+        let jEle;
         function funReshow(intPage) {
             jEle = $("#divEveryPhoto");
             jEle[0].innerHTML = "";
-            for (let tmpI = intPage * 10; tmpI < (Math.min((intPage + 1) * 10 , arrAlbumConfig.length)); tmpI++) {
+            for (let tmpI = intPage * 10; tmpI < (Math.min((intPage + 1) * 10, arrAlbumConfig.length)); tmpI++) {
                 let imgPhoto = document.createElement("img");
                 imgPhoto.className = "album-item-img";
                 imgPhoto.src = arrAlbumConfig[tmpI].PName;
-                imgPhoto.onclick= function (e) {
+                imgPhoto.onclick = function (e) {
                     $('#showphoto img')[0].src = e.target.currentSrc.replace(/\/thumbnailphoto\//, "\/photo\/");
                     $('#album').addClass('gotblur');
-                    $('#showphoto')[0].style.left = ((window.innerWidth - $('#showphoto').width()) / 2) + 'px';
+                    if (window.innerWidth <= 768) {
+                        $('#showphoto')[0].style.left = '0px';
+                    } else {
+                        $('#showphoto')[0].style.left = ((window.innerWidth - $('#showphoto').width()) / 2) + 'px';
+                    };
                     $('#showphoto img').css({ "maxHeight": (window.innerHeight - 230) + "px" });
                     $('#showphoto').show();
                 };
