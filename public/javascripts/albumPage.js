@@ -7,7 +7,7 @@ function albumPage() {
         function funReshow(intPage) {
             jEle = $("#divEveryPhoto");
             jEle[0].innerHTML = "";
-            for (let tmpI = intPage * 10; tmpI < (Math.min((intPage + 1) * 10, arrAlbumConfig.length)); tmpI++) {
+            for (let tmpI = intPage * 15; tmpI < (Math.min((intPage + 1) * 15, arrAlbumConfig.length)); tmpI++) {
                 let imgPhoto = document.createElement("img");
                 imgPhoto.className = "album-item-img";
                 imgPhoto.src = arrAlbumConfig[tmpI].PName;
@@ -44,7 +44,7 @@ function albumPage() {
 
         $("#pagination").pagination(    //分布总数量，必须参数
             {
-                pageSize: 10,
+                pageSize: 15,
                 total: arrAlbumConfig.length
             }
         );

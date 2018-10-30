@@ -204,8 +204,8 @@ a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:acti
 .intro h1 {
 	font-family: 'Rochester', cursive;
 	color: #fff;
-	font-size: 10em;
-	font-weight: 400;
+	font-size: 9em;
+	font-weight: 363;
 	margin-top: 0;
 }
 .intro span {
@@ -261,6 +261,11 @@ header .intro-text {
 	padding: 60px 0;
 }
 
+.btn-upload {
+	height: 60px;
+}
+
+
 #about .btn-upload:hover, .btn-custom:focus, .btn-custom.focus, .btn-custom:active, .btn-custom.active {
 	color: #ddd;
 	border: 2px solid #3048d4;
@@ -271,6 +276,7 @@ header .intro-text {
 	background: #444 url(../images/DSCF5200.JPG) center center no-repeat;
 	background-size: cover;
 	height: 570px;
+	/* width:100%; */
 }
 #about p {
 	line-height: 24px;
@@ -364,12 +370,20 @@ header .intro-text {
 	left: 0;
 }
 #team img {
-	max-width: 550px;
+	max-width: 350px;
 }
 #team .team-img {
 	display: inline-block;
 	position: relative;
 }
+
+@media (max-width: 350px) {
+	#team img {
+		max-width: 250px;
+	}
+}
+
+
 /* Contact Section */
 #contact {
 	padding: 100px 0;
