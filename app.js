@@ -114,10 +114,10 @@ function funMakeAlbum() {
         var objEAlbum = { photo: [] };
         var arrDirOfOAlbum = fs.readdirSync(path.join(__dirname, 'public/photo/' + eleDir));
         objSAlbum.DName = eleDir;
-        objSAlbum.DPath = "/thumbnailphoto/" + eleDir + "/" + arrDirOfOAlbum[Math.round(Math.random() * (arrDirOfOAlbum.length - 1))];
+        objSAlbum.DPath = "thumbnailphoto/" + eleDir + "/" + arrDirOfOAlbum[Math.round(Math.random() * (arrDirOfOAlbum.length - 1))];
         objAlbum.album.push(objSAlbum);
         arrDirOfOAlbum.forEach(elePhoto => {
-            objEAlbum.photo.push({ "PName": "/thumbnailphoto/" + eleDir + "/" + elePhoto });
+            objEAlbum.photo.push({ "PName": "thumbnailphoto/" + eleDir + "/" + elePhoto });
         });
         var strEAlbum = JSON.stringify(objEAlbum);
         fs.writeFileSync(path.join(__dirname, 'config/album/' + eleDir + '.json'), strEAlbum);

@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
     DirPhoto = JSON.parse(fs.readFileSync(path.join(__dirname, '../config/album/' + req.query.dir + '.json')));
   }else{
     DirPhoto.photo=[];
-    DirPhoto.photo=[{"PName":"/images/noA.png"}];
+    DirPhoto.photo=[{"PName":"images/noA.png"}];
   };
   res.render('album', {
     title: '三世书之微生片段',
