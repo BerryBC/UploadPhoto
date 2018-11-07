@@ -89,10 +89,10 @@
 
 
   <!-- Single Photo Section -->
-  <div id="showphoto" hidden="hidden">
+  <div id="showphoto" hidden="hidden"  onmousewheel="return rollImg(this)">
     <div class="container">
-      <div id="single" class="text-center">
-        <img src="images/Loading.gif">
+      <div id="single" class="text-center" >
+        <img id="imgSingle" src="images/Loading.gif"  ondragstart="return false;" >
 
       </div>
     </div>

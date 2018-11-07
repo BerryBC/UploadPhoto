@@ -12,7 +12,10 @@ function albumPage() {
                 imgPhoto.className = "album-item-img";
                 imgPhoto.src = arrAlbumConfig[tmpI].PName;
                 imgPhoto.onclick = function (e) {
-                    $('#showphoto img')[0].src = e.target.currentSrc.replace(/\/thumbnailphoto\//, "\/photo\/");
+					$('#showphoto').css({ "top": 130 });
+					$('#showphoto')[0].style.zoom='100%';
+					$('#single').innerHeight(window.innerHeight*0.8);
+                    $('#showphoto img')[0].src = e.target.src.replace(/\/thumbnailphoto\//, "\/photo\/");
                     $('#album').addClass('gotblur');
                     if (window.innerWidth <= 768) {
                         $('#showphoto')[0].style.left = '0px';
@@ -50,8 +53,40 @@ function albumPage() {
         );
         $("#pagination").on("pageClicked", function (event, data) {
             funReshow(data.pageIndex);
-        });
+		});
+		
+
+		$('#imgSingle').mousedown(function (e) {
+			var isMove = true;
+			var div_x = e.pageX - $('#showphoto').position().left;
+			var div_y = e.pageY - $('#showphoto').position().top;
+			$(document).mousemove(function (e) {
+				if (isMove) {
+					var obj = $('#showphoto');
+					obj.css({"left":e.pageX - div_x, "top":e.pageY - div_y});
+				}
+			}).mouseup(
+				function () {
+					isMove = false;
+				}
+			);
+		});
+
     }());
+};
+function rollImg(o){
+    /* 获取当前页面的缩放比
+        若未设置zoom缩放比，则为默认100%，即1，原图大小
+    */ 
+    var zoom=parseInt(o.style.zoom)||100;
+    /* event.wheelDelta 获取滚轮滚动值并将滚动值叠加给缩放比zoom
+        wheelDelta统一为±120，其中正数表示为向上滚动，负数表示向下滚动
+    */
+    zoom+=event.wheelDelta/12;
+    /* 如果缩放比大于0，则将缩放比加载到页面元素 */
+    if (zoom>0) o.style.zoom=zoom+'%';
+    /* 如果缩放比不大于0，则返回false，不执行操作 */
+    return false;
 };
 albumPage();
 (function () {

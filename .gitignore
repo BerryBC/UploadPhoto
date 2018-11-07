@@ -4,4 +4,6 @@
 /tmpFile
 /config
 /config/album
-/config/
+/config/*
+/config/album/*
+config/album/XE2.json
